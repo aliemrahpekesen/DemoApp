@@ -1,11 +1,21 @@
 // Fetches OHLC data from Yahoo Finance's public chart endpoint.
 // No API key required. Works for BIST tickers via the ".IS" suffix.
 //
-// Example: fetchCandles('THYAO.IS', '6mo', '1d')
-const BASE_URL = 'https://query1.finance.yahoo.com/v8/finance/chart';
+// Yahoo doesn't send CORS headers, so browser builds route through a public
+// CORS proxy. Native builds hit Yahoo directly.
+const YF_URL = 'https://query1.finance.yahoo.com/v8/finance/chart';
+const WEB_PROXY = 'https://corsproxy.io/?';
+
+const isWeb =
+  typeof window !== 'undefined' && typeof window.document !== 'undefined';
+
+function buildUrl(symbol, range, interval) {
+  const target = `${YF_URL}/${encodeURIComponent(symbol)}?range=${range}&interval=${interval}`;
+  return isWeb ? `${WEB_PROXY}${encodeURIComponent(target)}` : target;
+}
 
 export async function fetchCandles(symbol, range = '6mo', interval = '1d') {
-  const url = `${BASE_URL}/${encodeURIComponent(symbol)}?range=${range}&interval=${interval}`;
+  const url = buildUrl(symbol, range, interval);
   const res = await fetch(url, {
     headers: { Accept: 'application/json' },
   });

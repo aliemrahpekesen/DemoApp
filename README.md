@@ -61,24 +61,38 @@ npx expo start
 Then press `i` for iOS simulator, `a` for Android emulator, or scan the QR
 code with the Expo Go app on your phone.
 
-## Install on Android via GitHub Actions
+## Open the live web demo
 
-Every push to `master` or a `claude/**` branch triggers the **Android APK**
-workflow (`.github/workflows/android.yml`), which:
+The **Deploy Web** workflow (`.github/workflows/web.yml`) runs on every push
+to `master` or a `claude/**` branch. It exports the Expo web bundle and
+publishes it to GitHub Pages.
 
-1. Runs `expo prebuild` to generate the native Android project.
-2. Builds a debug-signed APK with Gradle.
-3. Uploads it as the workflow artifact `bist-demo-apk`.
+Live URL (after first successful deploy):
+**https://aliemrahpekesen.github.io/DemoApp/**
 
-To install on your phone:
+One-time setup (repo owner only): open the repo on GitHub → **Settings →
+Pages** → set **Source** to **GitHub Actions**. After that, every push
+re-deploys automatically.
 
-1. Open the repo on GitHub → **Actions** tab → latest **Android APK** run.
-2. Download the `bist-demo-apk` artifact (a `.zip`).
-3. Extract the `.apk`, transfer it to your Android device.
-4. Allow installs from unknown sources, then tap to install.
+Open the URL from any mobile browser — the layout is responsive.
 
-> iOS is not built in CI — signed IPAs require an Apple Developer account
-> and provisioning profiles. For iOS, use `npx expo start` with Expo Go.
+### CORS note
+
+Yahoo Finance does not send CORS headers, so the web build routes requests
+through the public `corsproxy.io` proxy. This is fine for a demo but you
+should host your own proxy (or a licensed data source) for anything beyond
+that. Native builds hit Yahoo directly without a proxy.
+
+## Optional: install on Android
+
+The **Android APK** workflow (`.github/workflows/android.yml`) is set to
+**manual trigger only** (Actions → Android APK → *Run workflow*). It runs
+`expo prebuild`, builds a debug-signed APK with Gradle, and uploads it as
+the `bist-demo-apk` artifact. Download, extract, transfer to your phone,
+allow installs from unknown sources, and tap to install.
+
+> iOS is not built in CI — signed IPAs need an Apple Developer account and
+> provisioning. For iOS testing, use `npx expo start` with Expo Go.
 
 ## Notes
 

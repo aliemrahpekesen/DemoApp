@@ -1,11 +1,6 @@
 name: Android APK
 
 on:
-  push:
-    branches:
-      - master
-      - main
-      - claude/**
   workflow_dispatch:
 
 jobs:
