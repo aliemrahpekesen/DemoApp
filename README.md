@@ -51,7 +51,7 @@ src/
   theme.js
 ```
 
-## Run
+## Run locally
 
 ```bash
 npm install
@@ -60,6 +60,25 @@ npx expo start
 
 Then press `i` for iOS simulator, `a` for Android emulator, or scan the QR
 code with the Expo Go app on your phone.
+
+## Install on Android via GitHub Actions
+
+Every push to `master` or a `claude/**` branch triggers the **Android APK**
+workflow (`.github/workflows/android.yml`), which:
+
+1. Runs `expo prebuild` to generate the native Android project.
+2. Builds a debug-signed APK with Gradle.
+3. Uploads it as the workflow artifact `bist-demo-apk`.
+
+To install on your phone:
+
+1. Open the repo on GitHub → **Actions** tab → latest **Android APK** run.
+2. Download the `bist-demo-apk` artifact (a `.zip`).
+3. Extract the `.apk`, transfer it to your Android device.
+4. Allow installs from unknown sources, then tap to install.
+
+> iOS is not built in CI — signed IPAs require an Apple Developer account
+> and provisioning profiles. For iOS, use `npx expo start` with Expo Go.
 
 ## Notes
 

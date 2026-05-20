@@ -11,9 +11,12 @@
       "resizeMode": "contain"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.bistdemo.app"
     },
     "android": {
+      "package": "com.bistdemo.app",
+      "versionCode": 1,
       "adaptiveIcon": {
         "backgroundColor": "#0b1220"
       }
