@@ -1,0 +1,32 @@
+{
+  "expo": {
+    "name": "BIST Demo",
+    "slug": "bist-demo",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "newArchEnabled": true,
+    "splash": {
+      "backgroundColor": "#0b1220",
+      "resizeMode": "contain"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.bistdemo.app"
+    },
+    "android": {
+      "package": "com.bistdemo.app",
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "backgroundColor": "#0b1220"
+      }
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "single"
+    },
+    "experiments": {
+      "baseUrl": "/DemoApp"
+    }
+  }
+}
